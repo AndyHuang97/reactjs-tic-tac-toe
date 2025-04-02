@@ -4,7 +4,10 @@ export default function player({ name, symbol }) {
   const [isEditing, setIsEditing] = useState(false);
 
   function handleEditClick() {
-    setIsEditing(!isEditing);
+    //setIsEditing(!isEditing); // => false
+    //setIsEditing(!isEditing); // => still false because react schedules the state update
+    setIsEditing((editing => !editing)); // => false
+    //setIsEditing((editing => !editing)); // => would set to true and nothing would happen on UI
   }
 
   function handleSave() {
