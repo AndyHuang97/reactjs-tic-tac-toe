@@ -22,6 +22,11 @@ function deriveActivePlayer(gameTurns) {
 }
 
 function App() {
+  // avoid lifting state up from Player component, otherwise the entire app is rerendered at each keystroke
+  const [players, setPlayers] = useState({
+    "X": "Player 1",
+    "O": "Player 2",
+  })
   const [gameTurns, setGameTurns] = useState([]);
   // const [activePlayer, setActivePlayer] = useState("X");
 
@@ -77,6 +82,15 @@ function App() {
 
   function handleRestart() {
     setGameTurns([]);
+  }
+
+  function handlePlayerNameChange(symbol, newName) {
+    setPlayers((prevPlayers) => {
+      return {
+        ...prevPlayers,
+        [symbol]: newName, // square brackets to dynamically set the key
+      };
+    });
   }
 
   return (
